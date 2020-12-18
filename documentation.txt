@@ -1,0 +1,238 @@
+
+Google sheet link - https://docs.google.com/document/d/1OIlh7V3RiB0eYlZB7hattYyTKOW9kQheapWTWTIl6hk/edit
+
+Server Documentation
+
+1. For log-in
+
+ Route - /log-in
+Method - POST
+             Ex. http://localhost:3001/log-in
+
+i/p (as a body) -
+
+           {username : YOUR INPUT, password : YOUR INPUT}
+                        Ex. {
+                                 "username" : "kumaran.kugesh@gmail.com",
+	                     "password" : "raakk"
+                               }
+
+o/p - 
+          true - if he is a valid user ie, he was authenticated
+                     false - if he is not a valid user ie, he was not authenticated
+
+2. For sign-up
+
+ Route   -    /sign-up
+
+Method - POST
+Ex. http://localhost:3001/sign-up
+
+i/p -
+           {username : YOUR INPUT, password : YOUR INPUT}
+
+          Ex. {
+            "username" : "kumaran.kugesh1@gmail.com",
+	"password" : "raakk"
+            }
+
+o/p -
+           true - if the user signed up
+            false - if the user already has an account
+
+3. To get the list of bikes that the user previously serviced
+         
+Method - GET
+Route   -    /list-of-bikes
+
+
+i/p (as a query) -
+ {username : YOUR INPUT}
+
+Ex. localhost:3001/list-of-bikes/?username=kumaran.kugesh@gmail.com
+
+o/p - 
+            list of bike details
+Ex.
+[
+	{
+    	"chassis_no": "QWEDSFRE7558",
+    	"brand_name": "Bajaj",
+    	"model": "dominor 400",
+    	"reg_no": "TN75 1234"
+	},
+	{
+    	"model": "pulsar",
+    	"brand_name": "Bajaj",
+    	"reg_no": "TN11 1111",
+    	"chassis_no": "ADFD4355FD"
+	},
+]
+
+
+4. To book a service
+Method - POST
+Route   -    /servicebooking
+
+i/p -
+{
+    "username" : YOUR INPUT,
+    "reg_no" : YOUR INPUT,
+    "model" : YOUR INPUT,
+    "brand_name" : YOUR INPUT,
+    "chassis_no" : YOUR INPUT,
+    "mechanic_name" : YOUR INPUT,
+
+    "customer_service" : YOUR INPUT,
+    "periodic_service" : YOUR INPUT,
+    "painting_and_washing ":YOUR INPUT,
+    "status" : YOUR INPUT
+}
+
+Ex. 
+{
+    "username" : "kumaran.kugesh@gmail.com",
+    "reg_no" : "TN11 1119",
+    "model" : "pulsar",
+    "brand_name" : "Bajaj",
+    "chassis_no" : "ADFD4355FD",
+    "mechanic_name" : "prajesh",
+
+    "customer_service" : "ALL",
+    "periodic_service" : "ALL",
+    "painting_and_washing ":"ALL",
+    "status" : "Started"
+}
+
+o/p - 
+           true or false
+
+
+
+5. To get the pricelist of different services
+
+Method - GET
+
+Route - /service-pricelist
+
+           Ex. localhost:3001/service-pricelist
+
+i/p -
+           need not give any input
+
+o/p - Price list
+
+Ex,. [
+	{
+    	"suspension": 22,
+    	"performance_upgrading": 44
+	},
+	{
+    	"dent_painting": 7,
+    	"air_wash": 8
+	},
+	{
+    	"basic": 23,
+    	"general": 26
+	}
+]
+
+6. History of a bike
+
+Method - GET
+
+Route - /history-of-a-bike
+
+
+i/p (as a query) -
+
+             username and bike’s registration number 
+Ex. localhost:3001/history-of-a-bike/?username=kumaran.kugesh@gmail.com&reg_no=TN75 7856
+
+o/p -
+          Details of a bike based on the registration number given in the query
+
+Ex.
+{
+	"status": "completed",
+	"services_opted": {
+    	"periodic_service": "general",
+    	"customer_service": "suspention"
+	},
+	"reg_no": "TN75 7856",
+	"payment": 45,
+	"mechanic_name": "kumaravel"
+}
+
+
+
+7. History of a user
+
+Method - GET
+
+Route - /history-of-a-user
+
+
+i/p (as a query)  - 
+          username
+
+           Ex. localhost:3001/history-of-a-user?username=kumaran.kugesh@gmail.com
+
+o/p - 
+            Details of a bike based on the registration number given in the query
+
+             Ex.
+
+{
+	"history": [
+    	{
+        	"services_opted": {
+            	"customer_service": "suspention",
+            	"periodic_service": "general"
+        	},
+        	"mechanic_name": "kumaravel",
+        	"reg_no": "TN75 7856",
+        	"status": "completed",
+        	"payment": 45
+    	},
+    	{
+        	"payment": 138,
+        	"reg_no": "TN11 1119",
+        	"mechanic_name": "prajesh",
+        	"status": "started",
+        	"services_opted": {
+            	"periodic_service": "ALL",
+            	"customer_service": "ALL"
+        	}
+    	}
+	],
+	"password": "raakk",
+	"bike_details": [
+    	{
+        	"brand_name": "Bajaj",
+        	"reg_no": "TN11 1111",
+        	"chassis_no": "ADFD4355FD",
+        	"model": "pulsar"
+    	},
+    	{
+        	"chassis_no": "ADFD4355FD",
+        	"reg_no": "TN11 1113",
+        	"brand_name": "Bajaj",
+        	"model": "pulsar"
+    	},
+    	{
+        	"reg_no": "TN11 1116",
+        	"chassis_no": "ADFD4355FD",
+        	"brand_name": "Bajaj",
+        	"model": "pulsar"
+    	},
+    	{
+        	"model": "pulsar",
+        	"brand_name": "Bajaj",
+        	"reg_no": "TN11 1119",
+        	"chassis_no": "ADFD4355FD"
+    	}
+	],
+	"name": "Kugesh "
+}
+
