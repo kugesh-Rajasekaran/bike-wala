@@ -11,3 +11,20 @@ const historyOfABike = async (api, firebaseDb) => {
   })
 }
 module.exports = { historyOfABike };
+
+/*
+
+i/p (as a query)-username
+Ex.localhost:3001/history-of-a-user?username=kumaran.kugesh@gmail.com
+
+o/p-Details of a bike based on the registration number given in the query
+Ex.{"history": [{"services_opted": 
+                {"customer_service": "suspention","periodic_service": "general"},
+                "mechanic_name": "kumaravel",
+                "reg_no": "TN75 7856",
+                "status": "completed",
+                "payment": 45}]
+
+
+
+*/

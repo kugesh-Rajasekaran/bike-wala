@@ -8,16 +8,27 @@ const signUpUser = async (api, firebaseDb) => {
     await firebaseDb.collection("user_details").doc(req.body.username).get().then(data => checkData = data.data()).catch(err => console.log(err));
     if (checkData != null) {
 
-      res.send(false);
+      res.send(null);
     }
     else {
       await firebaseDb.collection("user_details").doc(req.body.username).set({
         password: req.body.password
-      }).then(val => res.send(true)).catch(err => res.send("Error occured"));
-      res.send(true)
+      }).then(val => res.send({message : "success"})).catch(err => res.send("Error occured"));
+      
     }
     // res.send(checkData)
   })
 
 }
 module.exports = { signUpUser };
+
+/*
+
+i/p-{username : YOUR INPUT, password : YOUR INPUT}
+Ex. {"username" : "kumaran.kugesh1@gmail.com",  "password" : "raakk"}
+
+o/p-{message : “success”} –  If signup successfully done
+             Null         –  If signup failed
+
+
+*/

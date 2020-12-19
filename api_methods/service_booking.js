@@ -19,15 +19,16 @@ const serviceBooking = async (api, firebaseDb) => {
         if (checkIfBikeExist) {
 
             await firebaseDb.collection("user_details").doc(req.body.username).update({ history: admin.firestore.FieldValue.arrayUnion({ mechanic_name: req.body.mechanic_name, payment: 12, reg_no: req.body.reg_no, name: req.body.name, status: "started", services_opted: { customer_service: req.body.customer_service, periodic_service: req.body.periodic_service } }) }).then(err => console.log(err));
-            res.send(true)
+            res.send({ message: "success" })
         }
         else {
 
             await firebaseDb.collection("user_details").doc(req.body.username).update({ bike_details: admin.firestore.FieldValue.arrayUnion({ reg_no: req.body.reg_no, chassis_no: req.body.chassis_no, model: req.body.model, brand_name: req.body.brand_name }) }).then(err => console.log(err));
             await firebaseDb.collection("user_details").doc(req.body.username).update({ history: admin.firestore.FieldValue.arrayUnion({ mechanic_name: req.body.mechanic_name, payment: price_for_service_opted, reg_no: req.body.reg_no, status: "started", services_opted: { customer_service: req.body.customer_service, periodic_service: req.body.periodic_service } }) }).then(err => console.log(err));
-            res.send(true)
+            res.send({ message: "success" })
         }
-            //res.send(false)
+
+        res.send(null)
         //  return  price_for_service_opted;
     })
 
@@ -66,3 +67,17 @@ async function calculatePrice(api, firebaseDb, priceData) {
 }
 
 module.exports = { serviceBooking };
+
+/*
+i/p-
+Ex.{"username" :"kumaran.kugesh@gmail.com","reg_no" : "TN11 1119",
+  "model" : "pulsar","brand_name" : "Bajaj","chassis_no" : "ADFD4355FD",
+  "mechanic_name" : "prajesh","customer_service" : "ALL","periodic_service" : "ALL",
+  "painting_and_washing ":"ALL","status" : "Started"}•
+  
+  o/p-
+   {message : “success”} –If booking successfully doneNull –If booking failed
+
+
+
+*/

@@ -13,3 +13,19 @@ const listOfBikes = async (api, firebaseDb) => {
 
 }
 module.exports = { listOfBikes };
+
+/*
+i/p (as a query) -{username : YOUR INPUT}
+
+Ex.localhost:3001/list-of-bikes/?username=kumaran.kugesh@gmail.com•
+
+o/p-list of bike details
+
+Ex.[{"chassis_no": "QWEDSFRE7558",
+"brand_name": "Bajaj",
+"model": "dominor 400",
+"reg_no": "TN75 1234"}
+]
+
+
+*/

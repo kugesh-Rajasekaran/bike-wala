@@ -12,6 +12,7 @@ const admin = constants.admin;
 const firebaseKey = require('./firebase-key.json');
 const port = constants.port;
 const serviceAccount = firebaseKey;
+const cors = require('cors')
 
 
 constants.admin.initializeApp({
@@ -20,7 +21,7 @@ constants.admin.initializeApp({
 const firebaseDb = constants.admin.firestore();
 
 const fieldVal = constants.admin.firestore.FieldValue;
-
+api.use(cors())
 api.use(bodyParser.json());
 
 /*initializing all endpoints*/
@@ -33,7 +34,7 @@ history_of_a_user.historyOfAUser(api, firebaseDb);
 service_pricelist.servicePriceList(api, firebaseDb);
 /*---------------------------------------- */
 api.listen(port, () => {
-    console.log("Server started running successfully at "+port);
+    console.log("Server started running successfully at " + port);
 });
 
 
